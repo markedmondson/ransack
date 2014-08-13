@@ -33,6 +33,12 @@ module Ransack
         Search.new(Person, :name_eq_any => ['foobar'])
       end
 
+      it "accepts context as an option" do
+        context = Context.for(Person)
+        search = Search.new(Person, {}, context: context)
+        expect(search.context).to eq context
+      end
+
       it 'does not raise exception for string :params argument' do
         expect { Search.new(Person, '') }.not_to raise_error
       end
